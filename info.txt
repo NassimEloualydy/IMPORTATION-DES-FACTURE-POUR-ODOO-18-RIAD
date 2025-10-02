@@ -1,0 +1,15 @@
+1 
+select count(*) from account_partial_reconcile where id not in (
+select id from account_partial_reconcile where credit_move_id in (
+    select id from account_move_line where move_id in 
+    (select id from account_move where cast(invoice_date as text) not like '2024%' and cast(invoice_date as text) not like '2025%')
+)
+)
+and id not in (
+select id from account_partial_reconcile where debit_move_id in (
+    select id from account_move_line where move_id in 
+    (select id from account_move where cast(invoice_date as text) not like '2024%' and cast(invoice_date as text) not like '2025%')
+)
+
+)
+;
