@@ -5,3 +5,23 @@ delete  from account_payment where partner_type='supplier' and cast(date as text
 delete  from account_move where cast(invoice_date as text) like '2023%' and move_type in ('in_invoice','in_refund');
 
 
+
+
+delete from account_partial_reconcile where credit_move_id in (
+    select id from account_move_line where move_id in (
+
+select id from account_move where origin_payment_id in (select id from account_payment where cast(date as text) like '2023%' and partner_type='supplier')
+    )
+
+);
+delete from account_partial_reconcile where debit_move_id in (
+    select id from account_move_line where move_id in (
+
+select id from account_move where origin_payment_id in (select id from account_payment where cast(date as text) like '2023%' and partner_type='supplier')
+    )
+
+);
+
+
+delete from account_move where origin_payment_id in (select id from account_payment where cast(date as text) like '2023%' and partner_type='supplier');
+delete from account_payment where cast(date as text) like '2023%' and partner_type='supplier';
