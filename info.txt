@@ -25,3 +25,9 @@ select id from account_move where origin_payment_id in (select id from account_p
 
 delete from account_move where origin_payment_id in (select id from account_payment where cast(date as text) like '2023%' and partner_type='supplier');
 delete from account_payment where cast(date as text) like '2023%' and partner_type='supplier';
+
+----
+dont forget to add to create 2 counts they are not exist !!!!!!!
+ 689 | {"en_US": "Caisse Barid Bank", "fr_FR": "Caisse Barid Bank"}
+ 687 | {"en_US": "Banque et liquidités", "fr_FR": "Banque et liquidités"}
+ 
